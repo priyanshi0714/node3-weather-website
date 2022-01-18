@@ -1,6 +1,6 @@
 const request = require('request')
 
-const forecast = (longitude,latitude,callback) => {
+const forecast = (latitude,longitude,callback) => {
     const url = 'http://api.weatherstack.com/current?access_key=c50abce7f275a77bbd02e52a17dc5c24&query=' + latitude + ',' + longitude
 
     request({url , json:true},(error,{body}) => {
@@ -10,7 +10,7 @@ const forecast = (longitude,latitude,callback) => {
             callback('Unable to find location.Try another search.')
         
          }else{
-            callback(undefined, body.current.weather_descriptions + ". It is currently "+ body.current.temperature +" degrees out.There is a "+body.current.precip+"% chance of rain."
+            callback(undefined, body.current.weather_descriptions + ". It is currently "+ body.current.temperature +" degrees out but feels like "+body.current.feelslike+". The humidity is "+body.current.humidity+" and there is a "+body.current.precip+"% chance of rain."
             )
         }
     })
